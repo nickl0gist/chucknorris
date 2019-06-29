@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class JokesLogger {
+public class JokesLogger implements JokesHistory {
 
     private String pathString;
 
@@ -16,6 +16,7 @@ public class JokesLogger {
         this.pathString = pathString;
     }
 
+    @Override
     public List<String> getIds(){
         List<String> list = new ArrayList<>();
         try (Stream<String> stream = Files.lines(Paths.get(pathString))) {
@@ -26,6 +27,7 @@ public class JokesLogger {
         return list;
     }
 
+    @Override
     public void setId(String newId) throws IOException {
         FileWriter fw = new FileWriter(pathString, true);
         try (Writer output = new BufferedWriter(fw)) {
