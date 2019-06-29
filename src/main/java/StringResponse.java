@@ -1,5 +1,4 @@
 import java.net.URL;
-import java.util.Date;
 
 public class StringResponse {
     private String[] categories;
