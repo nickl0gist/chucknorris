@@ -9,15 +9,19 @@ import java.util.Set;
 public class ChuckNorris {
 
     public static Set<String> getJokes(int number) throws IOException {
-
+        JokesLogger jokesLogger = new JokesLogger("norrisjokes.txt");
         Set<String> jokes = new HashSet<>();
         while (jokes.size()<number){
-         jokes.add(getNextJoke());
+            StringResponse stringResponse = getNextJoke();
+         if(!jokesLogger.getIds().contains(stringResponse.getId())) {
+             jokes.add(stringResponse.getValue());
+             jokesLogger.setId(stringResponse.getId());
+         }
         }
         return jokes;
     }
 
-    private static String getNextJoke()  throws IOException {
+    private static StringResponse getNextJoke()  throws IOException {
         URL url = new URL("https://api.chucknorris.io/jokes/random");
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
@@ -25,6 +29,6 @@ public class ChuckNorris {
         InputStreamReader isr = new InputStreamReader(con.getInputStream());
         Gson gson = new Gson();
         StringResponse sr = gson.fromJson(isr, StringResponse.class);
-        return sr.getValue();
+        return sr;
     }
 }
