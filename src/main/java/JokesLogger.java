@@ -5,7 +5,9 @@ import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 
 public class JokesLogger implements JokesHistory {
@@ -17,8 +19,8 @@ public class JokesLogger implements JokesHistory {
     }
 
     @Override
-    public List<String> getIds(){
-        List<String> list = new ArrayList<>();
+    public Set<String> getIds(){
+        Set<String> list = new HashSet<>();
         try (Stream<String> stream = Files.lines(Paths.get(pathString))) {
             stream.forEach(a -> list.add(a));
         } catch (IOException e){

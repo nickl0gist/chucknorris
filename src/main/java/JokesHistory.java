@@ -1,7 +1,7 @@
 import java.io.IOException;
-import java.util.List;
+import java.util.Set;
 
 public interface JokesHistory {
-    List<String> getIds();
+    Set<String> getIds();
     void setId(String newId) throws IOException;
 }
